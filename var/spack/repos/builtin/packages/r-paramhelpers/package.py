@@ -25,29 +25,18 @@
 from spack import *
 
 
-class Hadoop(Package):
-    """The Apache Hadoop software library is a framework that
-    allows for the distributed processing of large data sets
-    across clusters of computers using simple programming models.
-    """
+class RParamhelpers(RPackage):
+    """Functions for parameter descriptions and operations in black-box
+       optimization, tuning and machine learning. Parameters can be described
+       (type, constraints, defaults, etc.), combined to parameter sets and can
+       in general be programmed on. A useful OptPath object (archive) to log
+       function evaluations is also provided."""
 
-    homepage = "http://hadoop.apache.org/"
-    url      = "http://mirrors.ocf.berkeley.edu/apache/hadoop/common/hadoop-2.9.0/hadoop-2.9.0.tar.gz"
+    homepage = "https://github.com/berndbischl/ParamHelpers"
+    url      = "https://cran.r-project.org/src/contrib/ParamHelpers_1.10.tar.gz"
+    list_url = "https://cran.r-project.org/src/contrib/Archive/ParamHelpers"
 
-    version('3.1.0', 'f036ebd3fa0ef66ee1819e351d15b6cb')
-    version('2.9.0', 'b443ead81aa2bd5086f99e62e66a8f64')
+    version('1.10', '36e9060488ebd484d62cd991a4693332')
 
-    depends_on('java', type='run')
-
-    def install(self, spec, prefix):
-
-        def install_dir(dirname):
-            install_tree(dirname, join_path(prefix, dirname))
-
-        install_dir('bin')
-        install_dir('etc')
-        install_dir('include')
-        install_dir('lib')
-        install_dir('libexec')
-        install_dir('sbin')
-        install_dir('share')
+    depends_on('r-bbmisc@1.10:', type=('build', 'run'))
+    depends_on('r-checkmate@1.8.1:', type=('build', 'run'))

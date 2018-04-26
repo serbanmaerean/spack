@@ -25,29 +25,19 @@
 from spack import *
 
 
-class Hadoop(Package):
-    """The Apache Hadoop software library is a framework that
-    allows for the distributed processing of large data sets
-    across clusters of computers using simple programming models.
-    """
+class RParallelmap(RPackage):
+    """Unified parallelization framework for multiple back-end, designed for
+       internal package and interactive usage. The main operation is a parallel
+       "map" over lists. Supports local, multicore, mpi and BatchJobs mode.
+       Allows "tagging" of the parallel operation with a level name that can be
+       later selected by the user to switch on parallel execution for exactly
+       this operation."""
 
-    homepage = "http://hadoop.apache.org/"
-    url      = "http://mirrors.ocf.berkeley.edu/apache/hadoop/common/hadoop-2.9.0/hadoop-2.9.0.tar.gz"
+    homepage = "https://github.com/berndbischl/parallelMap"
+    url      = "https://cran.r-project.org/src/contrib/parallelMap_1.3.tar.gz"
+    list_url = "https://cran.r-project.org/src/contrib/Archive/parallelMap"
 
-    version('3.1.0', 'f036ebd3fa0ef66ee1819e351d15b6cb')
-    version('2.9.0', 'b443ead81aa2bd5086f99e62e66a8f64')
+    version('1.3', 'dd62866b395847b0bd5b13bed98c0081')
 
-    depends_on('java', type='run')
-
-    def install(self, spec, prefix):
-
-        def install_dir(dirname):
-            install_tree(dirname, join_path(prefix, dirname))
-
-        install_dir('bin')
-        install_dir('etc')
-        install_dir('include')
-        install_dir('lib')
-        install_dir('libexec')
-        install_dir('sbin')
-        install_dir('share')
+    depends_on('r-bbmisc@1.8:', type=('build', 'run'))
+    depends_on('r-checkmate@1.5.1:', type=('build', 'run'))
