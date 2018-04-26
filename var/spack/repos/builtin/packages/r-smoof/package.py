@@ -25,29 +25,28 @@
 from spack import *
 
 
-class Hadoop(Package):
-    """The Apache Hadoop software library is a framework that
-    allows for the distributed processing of large data sets
-    across clusters of computers using simple programming models.
-    """
+class RSmoof(RPackage):
+    """Provides generators for a high number of both single- and
+       multi- objective test functions which are frequently used for the
+       benchmarking of (numerical) optimization algorithms. Moreover, it offers
+       a set of convenient functions to generate, plot and work with objective
+       functions."""
 
-    homepage = "http://hadoop.apache.org/"
-    url      = "http://mirrors.ocf.berkeley.edu/apache/hadoop/common/hadoop-2.9.0/hadoop-2.9.0.tar.gz"
+    homepage = "http://github.com/jakobbossek/smoof"
+    url      = "https://cran.r-project.org/src/contrib/smoof_1.5.1.tar.gz"
+    list_url = "https://cran.r-project.org/src/contrib/Archive/smoof"
 
-    version('3.1.0', 'f036ebd3fa0ef66ee1819e351d15b6cb')
-    version('2.9.0', 'b443ead81aa2bd5086f99e62e66a8f64')
+    version('1.5.1', 'c3e3b5dafed34608f933ae255cf49054')
+    version('1.5', 'b371bde2724eade5a6d4d808fa3ad269')
 
-    depends_on('java', type='run')
-
-    def install(self, spec, prefix):
-
-        def install_dir(dirname):
-            install_tree(dirname, join_path(prefix, dirname))
-
-        install_dir('bin')
-        install_dir('etc')
-        install_dir('include')
-        install_dir('lib')
-        install_dir('libexec')
-        install_dir('sbin')
-        install_dir('share')
+    depends_on('r-paramhelpers@1.8:', type=('build', 'run'))
+    depends_on('r-bbmisc@1.6:', type=('build', 'run'))
+    depends_on('r-checkmate@1.1:', type=('build', 'run'))
+    depends_on('r-ggplot2@2.2.1:', type=('build', 'run'))
+    depends_on('r-rcolorbrewer', type=('build', 'run'))
+    depends_on('r-plot3d', type=('build', 'run'))
+    depends_on('r-plotly', type=('build', 'run'))
+    depends_on('r-mco', type=('build', 'run'))
+    depends_on('r-rcpp@0.11.0:', type=('build', 'run'))
+    depends_on('r-rjsonio', type=('build', 'run'))
+    depends_on('r-rcpparmadillo', type=('build', 'run'))
