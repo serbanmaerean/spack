@@ -25,16 +25,14 @@
 from spack import *
 
 
-class Typhon(CMakePackage):
-    """
-    Typhon is a distributed communications library for unstructured mesh
-    applications.
-    """
+class PyDocopt(PythonPackage):
+    """Command-line interface description language."""
 
-    homepage = "https://github.com/UK-MAC/Typhon"
-    url      = "https://github.com/UK-MAC/Typhon/archive/v3.0.tar.gz"
+    homepage = "http://docopt.org/"
+    url      = "https://pypi.io/packages/source/d/docopt/docopt-0.6.2.tar.gz"
 
-    version('3.0.1', '89045decfba5fd468ef05ad4c924df8c')
-    version('3.0', 'ec67cd1aa585ce2410d4fa50514a916f')
+    import_modules = ['docopt']
 
-    depends_on('mpi')
+    version('0.6.2', '4bc74561b37fad5d3e7d037f82a4c3b1')
+
+    depends_on('py-setuptools', type='build')
